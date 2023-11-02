@@ -6,22 +6,9 @@ app.use(express.json());
 
 const questions = require("./routes/questions");
 
-const username = "enesaktas";
-const password = "LmzBVBkVpW8sy3HN";
-const database = "questions";
+const connectDb = require("./config");
 
-const connectDb = async () => {
-  try {
-    await mongoose.connect(
-      `mongodb+srv://${username}:${password}@cluster0.vmezfft.mongodb.net/${database}`
-    );
-    console.log("mongoDb bağlantısı gerçekleştirldi.");
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-connectDb();
+connectDb;
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -34,6 +21,6 @@ app.use("/", (req, res) => {
   res.send("enes");
 });
 
-app.listen(3001, () => {
+app.listen(3000, () => {
   console.log("app is working on 3000 port");
 });
